@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  background-color: #f6f6f6;
+  color: #494949;
+}
+
+.to-do {
+  max-width: 400px;
+  margin:auto;
+  box-shadow: 5px 5px 20px#d8d8d8;
+  margin-top: 50px;
+}
+
+.today-todo,
+input,
+.listItems li,
+.clear {
+  border: 1px solid #f6f6f6;
+  background-color: white;
+  width: 400px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+input[type=text] {
+  font-style: italic;
+}
+
+.listItems li {
+  list-style-type: none;
+}
+
+.clear {
+  background-color: #f6f6f6;
+  color: #8f8f8f;
+  justify-content: center;
+}
