@@ -25,6 +25,10 @@ input,
   padding-left: 10px;
 }
 
+.clear {
+  width: 412px;
+}
+
 input[type=text] {
   font-style: italic;
 }
