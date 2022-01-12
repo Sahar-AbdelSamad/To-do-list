@@ -19,7 +19,7 @@ const task = [
   }
 ]
 
-function listTheItems() {
+const listTheItems = () => {
   for (let i=0 ; i< task.length; i += 1) {
     const li = document.createElement('li');
     const div = document.createElement('div');
@@ -33,5 +33,5 @@ function listTheItems() {
     div.append(input);
     listItems.appendChild(div);
   }
-} 
+};
 window.onload = listTheItems();
