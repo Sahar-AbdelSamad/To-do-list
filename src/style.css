@@ -14,7 +14,7 @@
 
 .today-todo,
 input,
-.listItems li,
+.listItems div,
 .clear {
   border: 1px solid #f6f6f6;
   background-color: white;
@@ -31,6 +31,36 @@ input[type=text] {
 
 .listItems li {
   list-style-type: none;
+}
+
+.listItem,
+.today-todo {
+  display: flex;
+  align-items: center;
+}
+
+.box {
+  order: 0;
+  width: 4%;
+  margin-right: 7px;
+}
+
+.listItem li,
+.today-todo p {
+  order: 1;
+  width: 90%;
+  background-color: white;
+}
+
+i {
+  background-color: white;
+  color: #dbd9d9;
+  order: 2;
+  width: 5%;
+}
+
+.today-todo i {
+  margin-right: 5px;
 }
 
 .clear {

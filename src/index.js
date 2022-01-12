@@ -22,8 +22,16 @@ const task = [
 function listTheItems() {
   for (let i=0 ; i< task.length; i += 1) {
     const li = document.createElement('li');
+    const div = document.createElement('div');
+    const input = document.createElement('input');
+    input.type = ('checkbox');
+    input.className = ('box');
     li.textContent = (`${task[i].description}`);
-    listItems.appendChild(li);
+    div.innerHTML = ('<i class="fas fa-ellipsis-v"></i>');
+    div.className = ('listItem');
+    div.appendChild(li);
+    div.append(input);
+    listItems.appendChild(div);
   }
 } 
 window.onload = listTheItems();
