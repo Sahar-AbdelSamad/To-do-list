@@ -15,6 +15,9 @@ class Task {
 }
 
 const removeTaskFunction = (e) => {
+  if (data && data[0]) {
+    tasks = data;
+  }
   const div = Array.from(document.querySelectorAll('[data-id]'));
   for (let i = 0; i < tasks.length; i += 1) {
     if (div[i].dataset.id === e.target.id.toString()) {
@@ -77,7 +80,7 @@ export const editTaskFunction = (ev) => {
 };
 
 const addtaskFunction = () => {
-  if (data[0]) {
+  if (data && data[0]) {
     tasks = data;
   }
   const newTask = new Task(inputTask.value);
