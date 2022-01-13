@@ -26,18 +26,19 @@ const removeTaskFunction = (e) => {
       tasks.splice(e.target.id, 1);
     }
   }
-  for (let i = 0; i <= tasks.length; i += 1) {
-    if (tasks.length === i) {
+  if (tasks.length ===0) {
       tasks[0] = undefined;
       localStorage.setItem('list', JSON.stringify(tasks));
       return;
+    } else {
+      for (let i = 0; i < tasks.length; i += 1) {
+        tasks[i].index = i;
+        div[i].dataset.id = i;
+        const removeTask = document.querySelectorAll('.fa-ellipsis-v');
+        removeTask[i].id = i;
+        localStorage.setItem('list', JSON.stringify(tasks));
+      }
     }
-    tasks[i].index = i;
-    div[i].dataset.id = i;
-    const removeTask = document.querySelectorAll('.fa-ellipsis-v');
-    removeTask[i].id = i;
-    localStorage.setItem('list', JSON.stringify(tasks));
-  }
 };
 
 export const editTaskFunction = (ev) => {
