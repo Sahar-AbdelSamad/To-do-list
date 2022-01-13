@@ -4,13 +4,11 @@ export const listItems = document.querySelector('.listItems');
 export const data = JSON.parse(localStorage.getItem('list'));
 let tasks = [];
 
-const id = 0;
-
 class Task {
   constructor(description, complete, index) {
     this.description = description;
     this.complete = false;
-    this.index = id + 1;
+    this.index = tasks.length + 1;
   }
 }
 
@@ -23,22 +21,22 @@ const removeTaskFunction = (e) => {
     if (div[i].dataset.id === e.target.id.toString()) {
       listItems.removeChild(div[i]);
       div.splice(i, 1);
-      tasks.splice(e.target.id, 1);
+      tasks.splice(e.target.id - 1, 1);
+      localStorage.setItem('list', JSON.stringify(tasks));
     }
   }
-  if (tasks.length ===0) {
-      tasks[0] = undefined;
+  if (tasks.length === 0) {
+    tasks[0] = undefined;
+    localStorage.setItem('list', JSON.stringify(tasks));
+  } else {
+    for (let i = 0; i < tasks.length; i += 1) {
+      tasks[i].index = i + 1;
+      div[i].dataset.id = i + 1;
+      const removeTask = document.querySelectorAll('.fa-ellipsis-v');
+      removeTask[i].id = i + 1;
       localStorage.setItem('list', JSON.stringify(tasks));
-      return;
-    } else {
-      for (let i = 0; i < tasks.length; i += 1) {
-        tasks[i].index = i;
-        div[i].dataset.id = i;
-        const removeTask = document.querySelectorAll('.fa-ellipsis-v');
-        removeTask[i].id = i;
-        localStorage.setItem('list', JSON.stringify(tasks));
-      }
     }
+  }
 };
 
 export const editTaskFunction = (ev) => {
@@ -47,30 +45,30 @@ export const editTaskFunction = (ev) => {
   }
   const div = Array.from(document.querySelectorAll('[data-id]'));
   const newValue = document.querySelector('.newValue');
-  if (div[ev.target.id].childNodes.length > 3 || (!newValue === false)) {
+  if (div[ev.target.id - 1].childNodes.length > 3 || (!newValue === false)) {
     return;
   }
   const editInput = document.createElement('input');
   editInput.name = ('newValue');
   editInput.className = ('newInput');
-  editInput.value = div[ev.target.id].childNodes[1].lastChild.data;
-  div[ev.target.id].childNodes[1].lastChild.data = '';
-  div[ev.target.id].className = ('newValue');
-  div[ev.target.id].innerHTML = (`<i class="fas fa-trash-alt" id="${ev.target.id}"></i><input type="checkbox" class="box">`);
-  div[ev.target.id].appendChild(editInput);
+  editInput.value = div[ev.target.id - 1].childNodes[1].lastChild.data;
+  div[ev.target.id - 1].childNodes[1].lastChild.data = '';
+  div[ev.target.id - 1].className = ('newValue');
+  div[ev.target.id - 1].innerHTML = (`<i class="fas fa-trash-alt" id="${ev.target.id}"></i><input type="checkbox" class="box">`);
+  div[ev.target.id - 1].appendChild(editInput);
   document.querySelector('.newInput').focus();
   editInput.addEventListener('keyup', (event) => {
     if (event.keyCode === 13) {
       const li = document.createElement('li');
       li.textContent = editInput.value;
-      div[ev.target.id].innerHTML = (`<i class="fas fa-ellipsis-v" id="${ev.target.id}"></i>`);
-      div[ev.target.id].className = ('listItem');
-      div[ev.target.id].appendChild(li);
+      div[ev.target.id - 1].innerHTML = (`<i class="fas fa-ellipsis-v" id="${ev.target.id}"></i>`);
+      div[ev.target.id - 1].className = ('listItem');
+      div[ev.target.id - 1].appendChild(li);
       const inputCheckbox = document.createElement('input');
       inputCheckbox.type = ('checkbox');
       inputCheckbox.className = ('box');
-      div[ev.target.id].appendChild(inputCheckbox);
-      tasks[ev.target.id].description = editInput.value;
+      div[ev.target.id - 1].appendChild(inputCheckbox);
+      tasks[ev.target.id - 1].description = editInput.value;
       localStorage.setItem('list', JSON.stringify(tasks));
       // Update Tasks
       document.querySelectorAll('.fa-ellipsis-v').forEach((item) => item.addEventListener('click', editTaskFunction));
@@ -85,7 +83,8 @@ const addtaskFunction = () => {
     tasks = data;
   }
   const newTask = new Task(inputTask.value);
-  newTask.index = tasks.length;
+  tasks.push(newTask);
+  localStorage.setItem('list', JSON.stringify(tasks));
   const li = document.createElement('li');
   const div = document.createElement('div');
   const input = document.createElement('input');
@@ -99,8 +98,6 @@ const addtaskFunction = () => {
   div.append(input);
   listItems.appendChild(div);
   inputTask.value = '';
-  tasks.push(newTask);
-  localStorage.setItem('list', JSON.stringify(tasks));
   // Update Tasks
   document.querySelectorAll('.fa-ellipsis-v').forEach((item) => item.addEventListener('click', editTaskFunction));
 };
