@@ -33,7 +33,9 @@ const removeTaskFunction = (e) => {
       tasks[i].index = i + 1;
       div[i].dataset.id = i + 1;
       const removeTask = document.querySelectorAll('.fa-ellipsis-v');
+      const input = document.querySelectorAll('.box');
       removeTask[i].id = i + 1;
+      input[i].dataset.input = i + 1;
       localStorage.setItem('list', JSON.stringify(tasks));
     }
   }
@@ -67,6 +69,7 @@ export const editTaskFunction = (ev) => {
       const inputCheckbox = document.createElement('input');
       inputCheckbox.type = ('checkbox');
       inputCheckbox.className = ('box');
+      inputCheckbox.dataset.input = ev.target.id;
       div[ev.target.id - 1].appendChild(inputCheckbox);
       tasks[ev.target.id - 1].description = editInput.value;
       localStorage.setItem('list', JSON.stringify(tasks));
@@ -90,6 +93,7 @@ const addtaskFunction = () => {
   const input = document.createElement('input');
   input.type = ('checkbox');
   input.className = ('box');
+  input.dataset.input = tasks.length;
   li.textContent = (`${newTask.description}`);
   div.innerHTML = (`<i class="fas fa-ellipsis-v" id= "${tasks.length}"></i>`);
   div.className = ('listItem');

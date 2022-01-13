@@ -1,5 +1,6 @@
 import './style.css';
 import { editTaskFunction, listItems, data } from './addAndRemove.js';
+import './addAndRemove';
 
 const listTheItemsFunction = () => {
   if (data) {
@@ -14,6 +15,7 @@ const listTheItemsFunction = () => {
         const input = document.createElement('input');
         input.type = ('checkbox');
         input.className = ('box');
+        input.dataset.input = i + 1;
         li.textContent = (`${tasks[i].description}`);
         div.innerHTML = (`<i class="fas fa-ellipsis-v" id="${i + 1}"></i>`);
         div.className = ('listItem');
