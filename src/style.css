@@ -14,8 +14,9 @@
 
 .today-todo,
 .text,
-.listItems div,
-.clear {
+.listItem,
+.clear,
+.newValue {
   border: 1px solid #f6f6f6;
   background-color: white;
   width: 400px;
@@ -28,11 +29,19 @@
 .text input {
   font-style: italic;
   width: 90%;
+  padding-left: 10px;
 }
 
 .submit,
 .text input {
   background-color: white;
+  border: none;
+  height: 50px;
+}
+
+.text input:focus,
+.newInput {
+  outline: none !important;
   border: none;
 }
 
@@ -45,7 +54,8 @@
 }
 
 .listItem,
-.today-todo {
+.today-todo,
+.newValue {
   display: flex;
   align-items: center;
 }
@@ -79,4 +89,25 @@ i {
   color: #8f8f8f;
   justify-content: center;
   width: 412px;
+}
+
+.newValue {
+  background-color: #fffec6;
+}
+
+.newInput {
+  width: 90%;
+  background-color: #fffec6;
+}
+
+.newValue i {
+  background-color: #fffec6;
+}
+
+.fa-ellipsis-v:hover {
+  cursor: pointer;
+}
+
+.fa-trash-alt:hover {
+  cursor: pointer;
 }
