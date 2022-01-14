@@ -1,7 +1,8 @@
 /* eslint-disable no-unused-vars */
+import { data, updateStatusesFunction } from './updateStatus.js';
+
 const inputTask = document.querySelector('input');
-export const listItems = document.querySelector('.listItems');
-export const data = JSON.parse(localStorage.getItem('list'));
+const listItems = document.querySelector('.listItems');
 let tasks = [];
 
 class Task {
@@ -25,24 +26,19 @@ const removeTaskFunction = (e) => {
       localStorage.setItem('list', JSON.stringify(tasks));
     }
   }
-  if (tasks.length === 0) {
-    tasks[0] = undefined;
+  for (let i = 0; i < tasks.length; i += 1) {
+    tasks[i].index = i + 1;
+    div[i].dataset.id = i + 1;
+    const removeTask = document.querySelectorAll('.fa-ellipsis-v');
+    const input = document.querySelectorAll('.box');
+    removeTask[i].id = i + 1;
+    input[i].dataset.input = i + 1;
     localStorage.setItem('list', JSON.stringify(tasks));
-  } else {
-    for (let i = 0; i < tasks.length; i += 1) {
-      tasks[i].index = i + 1;
-      div[i].dataset.id = i + 1;
-      const removeTask = document.querySelectorAll('.fa-ellipsis-v');
-      const input = document.querySelectorAll('.box');
-      removeTask[i].id = i + 1;
-      input[i].dataset.input = i + 1;
-      localStorage.setItem('list', JSON.stringify(tasks));
-    }
   }
 };
 
-export const editTaskFunction = (ev) => {
-  if (data[0]) {
+const editTaskFunction = (ev) => {
+  if (data && data[0]) {
     tasks = data;
   }
   const div = Array.from(document.querySelectorAll('[data-id]'));
@@ -75,15 +71,52 @@ export const editTaskFunction = (ev) => {
       localStorage.setItem('list', JSON.stringify(tasks));
       // Update Tasks
       document.querySelectorAll('.fa-ellipsis-v').forEach((item) => item.addEventListener('click', editTaskFunction));
+      const box = document.querySelectorAll('.box');
+      box.forEach((item) => item.addEventListener('change', updateStatusesFunction));
     }
   });
   // Remove tasks
   document.querySelector('.fa-trash-alt').addEventListener('click', removeTaskFunction);
 };
 
+export default function listTheItemsFunction() {
+  if (data) {
+    if (data[0]) {
+      const tasks = data;
+      tasks.sort((a, b) => a.index - b.index);
+      localStorage.setItem('list', JSON.stringify(tasks));
+      for (let i = 0; i < tasks.length; i += 1) {
+        tasks[i].index = i + 1;
+        const li = document.createElement('li');
+        const div = document.createElement('div');
+        const input = document.createElement('input');
+        input.type = ('checkbox');
+        input.className = ('box');
+        input.dataset.input = i + 1;
+        li.textContent = (`${tasks[i].description}`);
+        div.innerHTML = (`<i class="fas fa-ellipsis-v" id="${i + 1}"></i>`);
+        div.className = ('listItem');
+        div.dataset.id = i + 1;
+        div.appendChild(li);
+        div.append(input);
+        listItems.appendChild(div);
+        if (tasks[i].complete === true) {
+          div.children[1].style.textDecoration = 'line-through';
+          input.checked = true;
+        }
+        const removeTask = document.querySelectorAll('.fa-ellipsis-v');
+        removeTask.forEach((item) => item.addEventListener('click', editTaskFunction));
+      }
+    }
+  }
+}
+
 const addtaskFunction = () => {
-  if (data && data[0]) {
+  if (data) {
     tasks = data;
+  }
+  if (!inputTask.value) {
+    return;
   }
   const newTask = new Task(inputTask.value);
   tasks.push(newTask);
@@ -102,6 +135,8 @@ const addtaskFunction = () => {
   div.append(input);
   listItems.appendChild(div);
   inputTask.value = '';
+  const box = document.querySelectorAll('.box');
+  box.forEach((item) => item.addEventListener('change', updateStatusesFunction));
   // Update Tasks
   document.querySelectorAll('.fa-ellipsis-v').forEach((item) => item.addEventListener('click', editTaskFunction));
 };
