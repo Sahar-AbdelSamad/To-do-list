@@ -1,30 +1,9 @@
 import './style.css';
-import { editTaskFunction, listItems, data } from './addAndRemove.js';
+import listTheItemsFunction from './addAndRemove.js';
+import { updateStatusesFunction } from './updateStatus.js';
 
-const listTheItemsFunction = () => {
-  if (data) {
-    if (data[0]) {
-      const tasks = data;
-      tasks.sort((a, b) => a.index - b.index);
-      localStorage.setItem('list', JSON.stringify(tasks));
-      for (let i = 0; i < tasks.length; i += 1) {
-        tasks[i].index = i + 1;
-        const li = document.createElement('li');
-        const div = document.createElement('div');
-        const input = document.createElement('input');
-        input.type = ('checkbox');
-        input.className = ('box');
-        li.textContent = (`${tasks[i].description}`);
-        div.innerHTML = (`<i class="fas fa-ellipsis-v" id="${i + 1}"></i>`);
-        div.className = ('listItem');
-        div.dataset.id = i + 1;
-        div.appendChild(li);
-        div.append(input);
-        listItems.appendChild(div);
-        const removeTask = document.querySelectorAll('.fa-ellipsis-v');
-        removeTask.forEach((item) => item.addEventListener('click', editTaskFunction));
-      }
-    }
-  }
+window.onload = () => {
+  listTheItemsFunction();
+  const box = document.querySelectorAll('.box');
+  box.forEach((item) => item.addEventListener('change', updateStatusesFunction));
 };
-window.onload = listTheItemsFunction();
