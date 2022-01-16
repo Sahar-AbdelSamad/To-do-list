@@ -1,6 +1,7 @@
-import './style.css';
 import {instance} from './addAndRemove.js';
+import './style.css';
 
 window.onload = () => {
-  instance.listTheItemsFunction();
+  instance.editTask();
+  instance.updateStatuses();
 };
