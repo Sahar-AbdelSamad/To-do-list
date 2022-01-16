@@ -1,14 +1,15 @@
-class ToDoList {
+export class ToDoList {
   constructor() {
     this.tasks = JSON.parse(localStorage.getItem('list') || '[]');
     this.complete = false;
     this.inputTask = document.querySelector('.inputTask');
     this.listItems = document.querySelector('.listItems');
     this.completedTasks = document.querySelector('.clear');
+    this.indexStart = 0;
+    this.indexDrop = 0;
   }
 
   listTheItems = () => {
-    // tasks.sort((a, b) => a.index - b.index);
     this.tasks.forEach((todo, index) => {
       const div = document.createElement('div');
       const li = document.createElement('li');
@@ -17,6 +18,7 @@ class ToDoList {
         li.style.textDecoration = 'line-through';
       }
       div.id = index;
+      div.draggable = 'true';
       div.innerHTML = `<i class="fas fa-ellipsis-v dots"></i>
       <input type="checkbox" class="box" ${todo.completed ? 'checked' : ''}>`;
       div.className = 'listItem';
@@ -110,6 +112,11 @@ class ToDoList {
       this.localStorage(complete);
     });
   };
+
+  getTaskArray = () => {
+    const data = this.tasks;
+    return data;
+  }
 }
 
 export const instance = new ToDoList();
@@ -118,3 +125,4 @@ instance.clearCompleted();
 instance.listTheItems();
 export const edit = instance.editTask();
 export const statusUpdate = instance.updateStatuses();
+export const data = instance.getTaskArray();

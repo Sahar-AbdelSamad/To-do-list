@@ -49,8 +49,18 @@
   color: #c0c0c0;
 }
 
+.listItem {
+  cursor: move;
+}
+
+.listItem.over {
+  border: 1px solid black;
+}
+
 .listItems li {
   list-style-type: none;
+  cursor: move;
+  background-color: darkgrey;
 }
 
 .listItem,
