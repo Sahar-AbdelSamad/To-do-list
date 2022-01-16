@@ -9,7 +9,6 @@
     "start": "webpack serve --open",
     "build": "webpack",
     "deploy": "gh-pages -d dist"
-
   },
   "repository": {
     "type": "git",
@@ -23,6 +22,7 @@
   },
   "homepage": "https://github.com/Sahar-AbdelSamad/webpack-boilerplate#readme",
   "devDependencies": {
+    "@productboard/webpack-deploy": "github:productboard/webpack-deploy",
     "babel-eslint": "^10.1.0",
     "css-loader": "^6.5.1",
     "eslint": "^7.32.0",
