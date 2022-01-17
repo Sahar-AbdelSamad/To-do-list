@@ -5,10 +5,8 @@
   "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "watch": "webpack --watch",
     "start": "webpack serve --open",
-    "build": "webpack",
-    "deploy": "gh-pages -d dist"
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -41,8 +39,6 @@
     "webpack-dev-server": "^4.7.3"
   },
   "dependencies": {
-    "gh-pages": "^3.2.3",
     "lodash": "^4.17.21"
-  },
-  "main": "webpack.config.js"
+  }
 }
