@@ -35,8 +35,8 @@ export class ToDoList {
           index: this.tasks.length + 1,
           completed: false,
         };
-        this.tasks.push(newTask);
-        this.localStorage(this.tasks);
+        const newTaskAdded = this.tasks.concat(newTask);
+        this.localStorage(newTaskAdded);
         this.inputTask.value = '';
       }
     });
@@ -68,8 +68,13 @@ export class ToDoList {
               parent.innerHTML = '<i class="fas fa-ellipsis-v dots"></i><input type="checkbox" class="box">';
               parent.className = 'listItem';
               parent.appendChild(li);
-              this.tasks[parent.id].description = editInput.value;
-              this.localStorage(this.tasks);
+              const newTaskUpdated = this.tasks.map((item) => ({
+                description: item.description,
+                index: item.index,
+                completed: item.completed,
+              }));
+              newTaskUpdated[parent.id].description = editInput.value;
+              this.localStorage(newTaskUpdated);
             }
           });
         }
@@ -78,12 +83,13 @@ export class ToDoList {
   };
 
   removeTask = (index) => {
-    this.tasks.splice(index, 1);
-    this.localStorage(this.tasks);
-    this.tasks.forEach((item, index) => {
+    const beforRemovedItem = this.tasks.slice(0, index);
+    const afterRemovedItem = this.tasks.slice(+index + 1, this.tasks.length + 1);
+    const arrayWithRemovedTask = beforRemovedItem.concat(afterRemovedItem);
+    arrayWithRemovedTask.forEach((item, index) => {
       item.index = index + 1;
-      this.localStorage(this.tasks);
     });
+    this.localStorage(arrayWithRemovedTask);
   };
 
   localStorage = (array) => {
