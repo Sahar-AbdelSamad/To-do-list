@@ -11,7 +11,7 @@ This website is built using ES6 and Webpack!
 
 ## Live Demo
 
-You can see [the app live here](https://sahar-abdelsamad.github.io/To-do-list/dist/)
+You can see [the app live here](https://sahar-abdelsamad.github.io/To-do-list/)
 
 ## Built With
 
