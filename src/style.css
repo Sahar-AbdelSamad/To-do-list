@@ -3,6 +3,7 @@
   padding: 0;
   background-color: #f6f6f6;
   color: #494949;
+  box-sizing: border-box;
 }
 
 .to-do {
@@ -12,41 +13,42 @@
   margin-top: 50px;
 }
 
-.today-todo,
-.text,
+.to-do p,
+.inputTask,
 .listItem,
 .clear,
 .newValue {
   border: 1px solid #f6f6f6;
   background-color: white;
-  width: 400px;
+  width: 100%;
   height: 50px;
   display: flex;
   align-items: center;
   padding-left: 10px;
 }
 
-.text input {
+.inputTask {
   font-style: italic;
-  width: 90%;
-  padding-left: 10px;
-}
-
-.submit,
-.text input {
-  background-color: white;
   border: none;
-  height: 50px;
 }
 
-.text input:focus,
+.inputTask:focus,
 .newInput {
-  outline: none !important;
+  outline: none;
   border: none;
 }
 
-.submit {
-  color: #c0c0c0;
+.clear {
+  background-color: #f6f6f6;
+  color: #8f8f8f;
+  justify-content: center;
+  padding-left: 0;
+}
+
+.listItems li {
+  list-style-type: none;
+  cursor: move;
+  background-color: darkgrey;
 }
 
 .listItem {
@@ -57,14 +59,7 @@
   border: 1px solid black;
 }
 
-.listItems li {
-  list-style-type: none;
-  cursor: move;
-  background-color: darkgrey;
-}
-
 .listItem,
-.today-todo,
 .newValue {
   display: flex;
   align-items: center;
@@ -77,41 +72,30 @@
 }
 
 .listItem li,
-.today-todo p {
-  order: 1;
-  width: 90%;
+i,
+.newInput {
   background-color: white;
 }
 
+.listItem li {
+  order: 1;
+  width: 90%;
+}
+
 i {
-  background-color: white;
   color: #dbd9d9;
   order: 2;
   width: 10%;
 }
 
-.today-todo i {
-  margin-right: 5px;
-}
-
-.clear {
-  background-color: #f6f6f6;
-  color: #8f8f8f;
-  justify-content: center;
-  width: 412px;
-}
-
-.newValue {
+.newValue,
+.newInput,
+.newValue i {
   background-color: #fffec6;
 }
 
 .newInput {
   width: 90%;
-  background-color: #fffec6;
-}
-
-.newValue i {
-  background-color: #fffec6;
 }
 
 .fa-ellipsis-v:hover {

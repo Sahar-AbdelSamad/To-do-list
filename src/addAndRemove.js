@@ -30,57 +30,63 @@ export class ToDoList {
   addtask = () => {
     this.inputTask.addEventListener('keyup', (event) => {
       if (event.keyCode === 13) {
-        const newTask = {
-          description: this.inputTask.value,
-          index: this.tasks.length + 1,
-          completed: false,
-        };
-        const newTaskAdded = this.tasks.concat(newTask);
-        this.localStorage(newTaskAdded);
-        this.inputTask.value = '';
+        if (this.inputTask.value) {
+          const newTask = {
+            description: this.inputTask.value,
+            index: this.tasks.length + 1,
+            completed: false,
+          };
+          const newTaskAdded = this.tasks.concat(newTask);
+          this.localStorage(newTaskAdded);
+          this.inputTask.value = '';
+        }
       }
     });
   };
 
   editTask = () => {
-    document.querySelectorAll('.dots').forEach((item) => {
+    const dots = document.querySelectorAll('.dots');
+    dots.forEach((item) => {
       item.addEventListener('click', () => {
+        const parent = item.parentNode;
         const trash = document.querySelector('.trash');
+        const editInput = document.createElement('input');
         if (trash === null) {
-          const parent = item.parentNode;
-          const editInput = document.createElement('input');
-          editInput.name = 'newValue';
-          editInput.className = 'newInput';
-          editInput.value = parent.childNodes[3].lastChild.data;
-          parent.childNodes[3].lastChild.data = '';
-          parent.className = 'newValue';
-          parent.innerHTML = '<input type="checkbox" class="box"><i class="fas fa-trash-alt trash"></i>';
-          parent.appendChild(editInput);
-          document.querySelector('.newInput').focus();
+          this.changeInputTaskStyle(parent, editInput);
+          // Save updated Task
+          this.saveUpdatedTask(parent, editInput);
           // removeTask
           const trash = document.querySelector('.trash');
           trash.addEventListener('click', () => this.removeTask(parent.id));
-          // Save updated Task
-          editInput.addEventListener('keyup', (event) => {
-            if (event.keyCode === 13) {
-              const li = document.createElement('li');
-              li.textContent = editInput.value;
-              parent.innerHTML = '<i class="fas fa-ellipsis-v dots"></i><input type="checkbox" class="box">';
-              parent.className = 'listItem';
-              parent.appendChild(li);
-              const newTaskUpdated = this.tasks.map((item) => ({
-                description: item.description,
-                index: item.index,
-                completed: item.completed,
-              }));
-              newTaskUpdated[parent.id].description = editInput.value;
-              this.localStorage(newTaskUpdated);
-            }
-          });
         }
       });
     });
-  };
+  }
+
+  changeInputTaskStyle = (parent, editInput) => {
+    editInput.name = 'newValue';
+    editInput.className = 'newInput';
+    editInput.value = parent.childNodes[3].lastChild.data;
+    parent.childNodes[3].lastChild.data = '';
+    parent.className = 'newValue';
+    parent.innerHTML = '<input type="checkbox" class="box"><i class="fas fa-trash-alt trash"></i>';
+    parent.appendChild(editInput);
+    document.querySelector('.newInput').focus();
+  }
+
+  saveUpdatedTask = (parent, editInput) => {
+    editInput.addEventListener('keyup', (event) => {
+      if (event.keyCode === 13) {
+        const newTaskUpdated = this.tasks.map((item) => ({
+          description: item.description,
+          index: item.index,
+          completed: item.completed,
+        }));
+        newTaskUpdated[parent.id].description = editInput.value;
+        this.localStorage(newTaskUpdated);
+      }
+    });
+  }
 
   removeTask = (index) => {
     const beforRemovedItem = this.tasks.slice(0, index);
