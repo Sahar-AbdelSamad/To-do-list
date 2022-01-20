@@ -18,5 +18,25 @@ export const removeTask = (index) => {
   arrayWithRemovedTask.forEach((item, index) => {
     item.index = index + 1;
   });
+  console.log(arrayWithRemovedTask)
   localStorage.setItem('list', JSON.stringify(arrayWithRemovedTask));
+};
+
+export const editTask = (task, textUpdate) => {
+  task.description = textUpdate;
+  console.log(task)
+  localStorage.setItem("list",JSON.stringify(task));
+};
+
+export const updateStatuses = (task, status) => {
+  task.completed = status;
+  localStorage.setItem("list", task);
+};
+
+export const clearCompleted = () => {
+  const arr = JSON.parse(localStorage.getItem('list') || '[]');
+  console.log(arr)
+  const notCompleted = arr.filter((task) => task.completed !== true);
+  console.log(notCompleted)
+  localStorage.setItem("list", notCompleted);
 };
