@@ -1,23 +1,22 @@
-export default function storageMock() {
-  let storage = {};
+export default function StorageMock() {
+  const storage = {};
 
   return {
-    setItem: function(key, value) {
+    setItem(key, value) {
       storage[key] = value || '';
     },
-    getItem: function(key) {
-      return key in storage ? storage[key] : null
+    getItem(key) {
+      return key in storage ? storage[key] : null;
     },
-    removeItem: function(key) {
+    removeItem(key) {
       delete storage[key];
     },
     get length() {
       return Object.keys(storage).length;
     },
-    key: function(i) {
+    key(i) {
       const keys = Object.keys(storage);
       return keys[i] || null;
-    }
+    },
   };
 }
-

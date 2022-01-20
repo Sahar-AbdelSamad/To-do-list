@@ -1,9 +1,11 @@
 /** * @jest-environment jsdom */
-import { addtask, removeTask, editTask, updateStatuses, clearCompleted } from '../addDelete.js'
+import {
+  addtask, removeTask,
+} from '../addDelete.js';
 
 describe('Add and delete tests', () => {
   const task = {
-    description: "Task1",
+    description: 'Task1',
     index: 1,
     completed: false,
   };
@@ -12,12 +14,11 @@ describe('Add and delete tests', () => {
     addtask(task);
     const list = document.querySelectorAll('.listItem');
     expect(list).toHaveLength(1);
-  })
+  });
 
   test('Delete a task', () => {
-    const remove = removeTask(0);
+    removeTask(0);
     const list = document.querySelectorAll('.listItem');
     expect(list).toHaveLength(0);
-    }) 
+  });
 });
-    

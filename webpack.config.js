@@ -18,23 +18,11 @@ module.exports = {
     clean: true,
   },
   module: {
-    rules: [
-      {
-        test: /\.css$/i,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.(png|svg|jpg|jpeg|gif)$/i,
-        type: 'asset/resource',
-      },
-    ],
-  },
-  module: {
     loaders: [
-      {exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/},
-      {loader: 'style-loader!css-loader', test: /\.css$/},
-      {loader: 'url-loader', test: /\.gif$/},
-      {loader: 'file-loader', test: /\.(ttf|eot|svg)$/},
+      { exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/ },
+      { loader: 'style-loader!css-loader', test: /\.css$/ },
+      { loader: 'url-loader', test: /\.gif$/ },
+      { loader: 'file-loader', test: /\.(ttf|eot|svg)$/ },
     ],
   },
   resolve: {
@@ -49,5 +37,5 @@ module.exports = {
       'shared',
       '/shared/vendor/modules',
     ],
-  }
+  },
 };
