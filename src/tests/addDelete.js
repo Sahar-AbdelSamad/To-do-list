@@ -1,4 +1,4 @@
-import StorageMock from './__mocks__/storageMock.js';
+import StorageMock from './__mocks__/storageMock';
 
 const localStorage = new StorageMock();
 

@@ -1,5 +1,5 @@
-import { instance } from './addAndRemove.js';
-import { dragTask } from './reorder.js';
+import { instance } from './addAndRemove';
+import { dragTask } from './reorder';
 import './style.css';
 
 window.onload = () => {

@@ -1,7 +1,7 @@
 /** * @jest-environment jsdom */
 import {
   addtask, removeTask,
-} from '../addDelete.js';
+} from '../addDelete';
 
 describe('Add and delete tests', () => {
   const task = {
