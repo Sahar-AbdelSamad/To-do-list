@@ -20,3 +20,19 @@ export const removeTask = (index) => {
   });
   localStorage.setItem('list', JSON.stringify(arrayWithRemovedTask));
 };
+
+export const editTask = (task, textUpdate) => {
+  task.description = textUpdate;
+  localStorage.setItem('list', JSON.stringify(task));
+};
+
+export const updateStatuses = (task, status) => {
+  task.completed = status;
+  localStorage.setItem('list', task);
+};
+
+export const clearCompleted = () => {
+  const arr = JSON.parse(localStorage.getItem('list') || '[]');
+  const notCompleted = arr.filter((task) => task.completed !== true);
+  localStorage.setItem('list', notCompleted);
+};
