@@ -22,4 +22,10 @@ describe('Test clearCompleted tasks, update Status and edit Task', () => {
     editTask(task, textUpdate);
     expect(task.description).toEqual('This is the update');
   });
+
+  test('Update Status', () => {
+    const statusComplete = true;
+    updateStatuses(task, statusComplete);
+    expect(task.completed).toEqual(statusComplete);
+  });
 });
