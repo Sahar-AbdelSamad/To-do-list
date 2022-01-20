@@ -18,6 +18,18 @@ module.exports = {
     clean: true,
   },
   module: {
+    rules: [
+      {
+        test: /\.css$/i,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|svg|jpg|jpeg|gif)$/i,
+        type: 'asset/resource',
+      },
+    ],
+  },
+  module: {
     loaders: [
       { exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/ },
       { loader: 'style-loader!css-loader', test: /\.css$/ },
