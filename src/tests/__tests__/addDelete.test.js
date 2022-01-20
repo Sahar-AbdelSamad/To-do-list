@@ -1,6 +1,6 @@
 /** * @jest-environment jsdom */
 import {
-  addtask, removeTask
+  addtask, removeTask,
 } from '../addDelete';
 
 describe('Add and delete tests', () => {
@@ -21,5 +21,4 @@ describe('Add and delete tests', () => {
     const list = document.querySelectorAll('.listItem');
     expect(list).toHaveLength(0);
   });
-
 });
