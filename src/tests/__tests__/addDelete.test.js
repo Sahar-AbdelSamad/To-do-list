@@ -14,5 +14,10 @@ describe('Add and delete tests', () => {
     expect(list).toHaveLength(1);
   })
 
+  test('Delete a task', () => {
+    const remove = removeTask(0);
+    const list = document.querySelectorAll('.listItem');
+    expect(list).toHaveLength(0);
+    }) 
 });
     
