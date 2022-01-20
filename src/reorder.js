@@ -1,4 +1,4 @@
-import { data } from './addAndRemove.js';
+import { data } from './addAndRemove';
 
 let indexStart = 0;
 let indexDrop = 0;
