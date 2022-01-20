@@ -28,8 +28,7 @@ module.exports = {
         type: 'asset/resource',
       },
     ],
-  },
-  module: {
+
     loaders: [
       { exclude: ['node_modules'], loader: 'babel', test: /\.jsx?$/ },
       { loader: 'style-loader!css-loader', test: /\.css$/ },
