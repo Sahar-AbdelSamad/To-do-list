@@ -43,7 +43,7 @@ export class Drag {
     this.todoTasks.forEach((item, index) => {
       item.index = index + 1;
     });
-    localStorage.setItem('list', JSON.stringify(this.todoTasks));
+    localStorage.setItem('todoList', JSON.stringify(this.todoTasks));
     window.location.reload();
   };
 

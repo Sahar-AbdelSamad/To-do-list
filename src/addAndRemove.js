@@ -1,6 +1,6 @@
 export class ToDoList {
   constructor() {
-    this.tasks = JSON.parse(localStorage.getItem('list') || '[]');
+    this.tasks = JSON.parse(localStorage.getItem('todoList') || '[]');
     this.complete = false;
     this.inputTask = document.querySelector('.inputTask');
     this.listItems = document.querySelector('.listItems');
@@ -99,7 +99,7 @@ export class ToDoList {
   };
 
   localStorage = (array) => {
-    localStorage.setItem('list', JSON.stringify(array));
+    localStorage.setItem('todoList', JSON.stringify(array));
     window.location.reload();
   };
 
